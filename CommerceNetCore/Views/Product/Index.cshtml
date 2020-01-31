@@ -1,0 +1,39 @@
+﻿@model CommerceNetCore.Models.Product
+@{
+    ViewData["Title"] = $"{Model.Name}, {Model.Description}";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>@Model.Name</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="col-sm-12">
+                <img id="main_product_image" style="width:100%;height:auto;" src="@(Model.ProductImages.FirstOrDefault()==null?"":Model.ProductImages.FirstOrDefault().Path)" />
+            </div>
+            <div class="col-sm-12" style="margin-top:15px;">
+                <div class="row">
+                    @foreach (var item in Model.ProductImages)
+                    {
+                        <div class="col-sm-3">
+                            <a class="" href="#">
+                                <img style="width:100%;height:auto;" class="thumbnail_product" src="@item.Path" />
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <h5><span style="color:#0094ff">@Model.Price.ToString("#.00")</span> AMD</h5>
+            <h6>@Html.Raw(Model.Description)</h6>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/product.js"></script>
+}

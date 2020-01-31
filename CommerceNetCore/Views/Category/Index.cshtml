@@ -1,0 +1,28 @@
+﻿@model CommerceNetCore.Models.Category
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>@Model.Name</h1>
+<div class="container">
+    @foreach (var item in Model.Products)
+    {
+        <a href="/Product/Index/@item.Id">
+            <div class="row category_product">
+                <div class="col-sm-3" style="position:relative;">
+                    <img style="height:auto;width:100%;" src="@(item.ProductImages==null?"":item.ProductImages.FirstOrDefault().Path)" />
+                </div>
+                <div class="col-sm-9">
+                    <b>@(item.Name.Length <= 80 ? item.Name : item.Name.Substring(0, 80) + "...") </b>
+                    <p>Price: <span style="color:#0094ff">@item.Price.ToString("#.00")</span> AMD</p>
+                    <p>
+                        @Html.Raw(Model.Description)
+                    </p>
+                </div>
+            </div>
+        </a>
+    }
+</div>
+
+
+
